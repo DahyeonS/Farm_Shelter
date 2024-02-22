@@ -13,4 +13,3 @@ media/
 secrets.json
 *.code-workspace
 ml/
-python/
