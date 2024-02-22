@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+</head>
+<body>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'css/user/login.css' %}">
+    <link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css" rel="stylesheet">
+    <script src="{% static 'js/common.js' %}"></script>
+    <style>
+        .login_error {
+            list-style: none;
+            padding: 5px 10px !important;
+            font-size: 13px;
+        }
+    </style>
+
+    <a class="top_button_box">
+        <span>TOP</span>
+    </a>
+
+    <div class="wrap">
+        <header class="login_header">
+            <div class="logo">
+                <a href="{% url 'index' %}">
+                    <img src="../../static/img/common/logo_photo.png" alt="logo.png">
+                </a>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="main_container">
+                <div class="login_box">
+                    <div class="login_title">
+                        회원가입
+                    </div>
+                    <div class="login_form">
+                        <form method="post" action="{% url 'register' %}">
+                            {% csrf_token %}
+                            <div>
+                                <input placeholder="Id" type="text" name="username" value="{{ form.username.value|default_if_none:'' }}">
+                            </div>
+                            {% if form.username.errors %}
+                                <div>
+                                    <strong class="login_error">아이디를 입력하세요.</strong>
+                                </div>
+                            {% endif %}
+                            <div>
+                                <input placeholder="Password"  type="password" name="password1" value="{{ form.password1.value|default_if_none:'' }}">
+                            </div>
+                            {% if form.password1.errors %}
+                                <div>
+                                    <strong class="login_error">비밀번호를 입력하세요.</strong>
+                                </div>
+                            {% endif %}
+                            <div>
+                                <input placeholder="Password Check"  type="password" name="password2" value="{{ form.password2.value|default_if_none:'' }}">
+                            </div>
+                            {% if form.password2.errors %}
+                                {% for field in form %}
+                                    {% if field.errors %}
+                                        <div>
+                                            <strong class="login_error">{{field.errors}}</strong>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                            <div>
+                                <input placeholder="Email" type="text" name="email" value="{{ form.email.value|default_if_none:'' }}">
+                            </div>
+                            {% if form.email.errors %}
+                                <div>
+                                    <strong class="login_error">이메일을 입력하세요.</strong>
+                                </div>
+                            {% endif %}
+                            <div>
+                                <input placeholder="Last name"  type="text" name="last_name" value="{{ form.last_name.value|default_if_none:'' }}">
+                            </div>
+                            <div>
+                                <input placeholder="First name"  type="text" name="first_name" value="{{ form.first_name.value|default_if_none:'' }}">
+                            </div>
+                            <button type="submit">가입하기</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

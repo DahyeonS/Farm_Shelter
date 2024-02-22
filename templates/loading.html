@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/loading.css">
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <title>loading</title>
+</head>
+<body>
+    <div class="load">
+        <div class="container">
+            <div class="dot dot-1"></div>
+            <div class="dot dot-2"></div>
+            <div class="dot dot-3"></div>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+        <defs>
+            <filter id="goo">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 21 -7"/>
+            </filter>
+        </defs>
+        </svg>
+    </div>
+</body>
+
+<script>
+    $(function(){
+        setTimeout(function(){
+            $('.load').fadeOut(500);
+            setTimeout(function(){
+                $('.load').css('display: none')
+            },10)
+        },2000)
+    })
+</script>
+</html>

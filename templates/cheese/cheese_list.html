@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>치즈 목록</title>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+</head>
+<body>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cheese/cheese_list.css' %}">
+    <script src="{% static 'js/common.js' %}"></script>
+    <script src="{% static 'js/cheese/cheese_list.js' %}"></script>
+
+    <a class="top_button_box">
+        <span>TOP</span>
+    </a>
+    <div class="wrap">
+        <header class="head">
+            {% include 'header.html' %}
+        </header>
+
+        <main class="main">
+            <div class="home_link">
+                <div class="main_container">
+                    <div class="hl_box">
+                        <span class="linkb"><a href="{% url 'index' %}">홈</a> / </span>
+                        <span class="linkb">Cheese Book</span>
+                    </div>
+                </div>
+            </div>
+            <div class="main_container">
+                <div class="cheese_box">
+                    <div class="cb_title_box">
+                        <span class="titleBox">Cheese Book</span>
+                        <div class="kind_box">
+                            <div class="desk_kb">
+                                <span class="kb_name" id="not">All</span>
+                                <span class="kb_name" id="fresh">생치즈</span>
+                                <span class="kb_name" id="hard">경성치즈</span>
+                                <span class="kb_name" id="semi-soft">반경성치즈</span>
+                                <span class="kb_name" id="blue">블루치즈</span>
+                            </div>
+                            <div class="desk_kb">
+                                <span class="kb_name" id="bloomy">하얀 외피 연성치즈</span>
+                                <span class="kb_name" id="washed-rind">세척 외피 연성치즈</span>
+                            </div>
+                            <div class="mobile_kb">
+                                <span class="kb_name" id="not">All</span>
+                                <span class="kb_name" id="fresh">생치즈</span>
+                                <span class="kb_name" id="hard">경성치즈</span>
+                                <span class="kb_name" id="semi-soft">반경성치즈</span>
+                                <span class="kb_name" id="blue">블루치즈</span>
+                                <span class="kb_name" id="bloomy">하얀 외피 연성치즈</span>
+                                <span class="kb_name" id="washed-rind">세척 외피 연성치즈</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cb_content_box">
+                        <div class="cb_con_box">
+                        </div>
+                    </div>
+                </div>
+                <div id="paging" class="paging"></div>
+            </div>
+        </main>
+
+        {% include 'footer.html' %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <title>목장투어 목록</title>
+</head>
+<body>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'css/user/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/user/reservation.css' %}">
+    <link rel="stylesheet" href="{% static 'css/tour/tour.css' %}">
+    <link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="{% static 'js/common.js' %}"></script>
+
+    <div class="wrap">
+        <header class="login_header">
+            <div class="logo">
+                <a href="{% url 'index' %}">
+                    <img src="{% static 'img/common/logo_photo.png' %}" alt="logo.png">
+                </a>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="main_container">
+                <div class="tour_list_box">
+                    <div class="tour_total_box">
+                        <div class="tour_title">목장 투어목록</div>
+
+                        <div class="tour_box">
+                            {% for t in tour %}
+                            <a href="detail/{{forloop.counter}}" class="tour_list">{{t.name}}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="img_box">
+                        <div class="img_swiper">
+                            <div class="swiper mySwiper tour_list">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide tour_list_slide"><div class="farm_img farm_1"></div></div>
+                                    <div class="swiper-slide tour_list_slide"><div class="farm_img farm_2"></div></div>
+                                    <div class="swiper-slide tour_list_slide"><div class="farm_img farm_3"></div></div>
+                                </div>
+                                <div class="swiper-button-next tour_list_button_next"></div>
+                                <div class="swiper-button-prev tour_list_button_prev"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,176 @@
+.main_farm_box {
+    margin: 60px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    align-items: center;
+    justify-content: center;
+}
+.farm_story_box {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    font-size: 15px;
+    color: #333;
+    width: 100%;
+}
+.story_box {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.s_photo_box {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+}
+.story_photo  {
+    width: 100%;
+    height: 100%;
+    background-color: #ddd;
+    border-radius: 10px;
+}
+.farm_slide {
+    height: 400px !important;
+}
+.swiper-button-next:after, .swiper-button-prev:after {
+    font-size: 20px !important;
+}
+:root {
+    --swiper-theme-color: #fefee3 !important;
+}
+.sp_1 {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.sp_2 {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.sp_3 {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.sp_4 {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.sp_5 {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.fs_text_box, .story_text_box {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.farm_special_box {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    font-size: 15px;
+    color: #333;
+    width: 100%;
+}
+.fs_story_box {
+    display: flex;
+    gap: 10px;
+    color: #333;
+}
+.fs_photo_box {
+    width: 35%;
+    font-size: 13px;
+}
+.fs_photo {
+    width: 100%;
+    border-radius: 10px;
+}
+.farm_logo_link_box a {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    font-size: 14px;
+}
+.farm_logo_link_box a img {width: 100px;}
+.farm_map_box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.main_farm_box iframe {
+    width: 100%;
+    max-width: 500px;
+}
+.link_span_img_nothing {
+    border-bottom: 3px solid #4c956c;
+    border-top: 3px solid #4c956c;
+    padding: 5px 10px;
+    box-sizing: border-box;
+}
+.farm_story_map_box_flex {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 60px;
+}
+.story_photo_detail_3 {
+    background-position: bottom !important;
+}
+.cw_flex {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* 진주목장 */
+.pearl_css {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+    align-items: flex-start;
+}
+
+@media (max-width: 900px) {
+    .farm_story_map_box_flex {
+        flex-direction: column !important;
+        gap: 60px !important;
+    }
+    .farm_map_box,.farm_special_box {width: 100% !important;}
+    .fs_photo_box {width: 70% !important;}
+    .fs_story_box, .fs_text_box, .story_text_box {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+    .story_box, .s_photo_box {gap: 10px;}
+    .farm_story_box {gap: 30px;}
+    /* 진주목장 */
+    .pearl_css {
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media (max-width: 700px) {
+    .fs_photo_box {
+        width: 100% !important;
+        font-size: 13px;
+    }
+    /* 진주목장 */
+    .pearl_css {grid-template-columns: repeat(1,1fr);}
+}
+
+@media (max-width: 600px) {
+    .farm_slide, .s_photo_box {height: 250px !important;}
+}
+
+@media (max-width: 450px) {
+    .farm_slide, .s_photo_box {height: 200px !important;}
+}

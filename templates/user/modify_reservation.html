@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>예약 수정</title>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script>
+        function reservateConfirm() {
+            if (confirm('정말로 수정하시겠습니까? 수정 시 재결제가 필요합니다.')) $('form').submit();
+        }
+        function deleteConfirm() {
+            if (confirm('예약을 취소하시겠습니까? 취소 후에는 되돌릴 수 없으니 신중히 결정해주세요.')) location.href = '../delete_reservation/{{id}}'
+        }
+    </script>
+</head>
+<body>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/user/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/user/reservation.css' %}">
+    <link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css" rel="stylesheet">
+    <script src="{% static 'js/common.js' %}"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <div class="wrap">
+        <header class="login_header">
+            <div class="logo">
+                <a href="{% url 'index' %}">
+                    <img src="{% static 'img/common/logo_photo.png' %}" alt="logo.png">
+                </a>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="main_container">
+                <div class="reservation_css">
+                    <div class="tour_total_box modify_tour">
+                        <div class="tour_title">목장 예약변경</div>
+                        <div class="tour_box">
+                            <h3>예약 인원이 변경되면 이전 결제가 취소되어 재결제를 진행합니다.</h3>
+                            <form method="post" class="tour_modify_form">
+                                {% csrf_token %}
+                                <input type="hidden" name="username" value="{{form.username.value}}">
+                                <input type="hidden" name="email" value="{{form.email.value}}">
+                                <label for="last_name">성</label>
+                                <input placeholder="Last Name" type="text" name="last_name" id="last_name" value="{{form.last_name.value|default_if_none:''}}">
+                                <label for="first_name">이름</label>
+                                <input placeholder="First Name" type="text" name="first_name" id="first_name" value="{{form.first_name.value|default_if_none:''}}">
+                                <label for="people">인원수</label>
+                                <input placeholder="Id" type="number" name="people" id="people" min="1" max="5" value="{{form.people.value}}">
+                                <input class="submit" type="button" onclick="reservateConfirm();" value="예약 수정">
+                            </form>
+                            <a class="cancel_btn" href="javascript:void(0);" onclick="deleteConfirm();">예약 취소</a>
+                            <a class="cancel_btn" href="javascript:void(0);" onclick="history.back();">돌아가기</a>
+                        </div>
+                    </div>
+                    <div class="img_box">
+                        <div class="img_swiper">
+                            <div class="swiper mySwiper reservation">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide reservation_slide"><div class="farm_img farm_1"></div></div>
+                                    <div class="swiper-slide reservation_slide"><div class="farm_img farm_2"></div></div>
+                                    <div class="swiper-slide reservation_slide"><div class="farm_img farm_3"></div></div>
+                                </div>
+                                <div class="swiper-button-next reservation_button_next"></div>
+                                <div class="swiper-button-prev reservation_button_prev"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

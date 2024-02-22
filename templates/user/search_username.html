@@ -1,0 +1,43 @@
+{% include 'alert.html' %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아이디 찾기</title>
+</head>
+<body>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'css/user/login.css' %}">
+    <link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css" rel="stylesheet">
+    <script src="{% static 'js/common.js' %}"></script>
+    
+    <div class="wrap">
+        <header class="login_header">
+            <div class="logo">
+                <a href="{% url 'index' %}">
+                    <img src="{% static 'img/common/logo_photo.png' %}" alt="logo.png">
+                </a>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="main_container">
+                <div class="login_box">
+                    <div class="login_title">
+                        아이디 찾기
+                    </div>
+                    <div class="login_form">
+                        <form method="post">
+                            {% csrf_token %}
+                            <input placeholder="Email" type="email" name="email">
+                            <input type="submit" value="아이디 찾기" class="submit">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

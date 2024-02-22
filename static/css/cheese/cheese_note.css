@@ -1,0 +1,249 @@
+/* 공통 */
+.cs_story_box, .title, .cheese_story_box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.main_cheese_box {
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+    margin: 60px 0;
+}
+
+/* 치즈 역사 */
+.cheese_story_box {
+    flex-direction: column;
+    gap: 60px;
+}
+.title {
+    font-size: 25px;
+    font-weight: 500;
+    height: 70px;
+    position: relative;
+    color: #333;
+}
+.import_part {
+    height: 100%;
+}
+.title span {
+    position: absolute;
+    z-index: 99;
+}
+.cs_story_box {
+    flex-direction: column;
+    gap: 40px;
+}
+.cs_img_box {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    width: 100%;
+    justify-content: center;
+    height: 400px;
+}
+.background_csimg {
+    width: 50%;
+    height: 100%;
+
+}
+.bs_1 {
+    border-top-left-radius: 80px;
+    border-bottom-right-radius: 80px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.bs_2 {
+    border-top-left-radius: 80px;
+    border-bottom-right-radius: 80px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.csimg {
+    position: relative;
+}
+.csimg img {
+    width: 100%;
+}
+.csimg_after{
+    display: inline-block;
+    position: absolute;
+    top: -30px;
+    left: 50%;
+
+    width: 35px;
+    height: 70px;
+    background-color: #d68c45;
+    transform: rotate(10deg);
+    border-radius: 5px;
+    box-shadow: 2px 0 5px 0 rgba(0,0,0,0.2);
+}
+.cs_text_box {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+.line {
+    width: 80%;
+    height: 1px;
+    background-color: #ddd;
+    margin: auto;
+}
+.story div {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    color: #333;
+    font-size: 16px;
+}
+.story_ul {
+    font-size: 15px;
+    color: #333;
+    list-style: circle;
+    padding-left: 20px;
+}
+
+/* 치즈 요리 레시피 */
+.cheese_recipe_box {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    width: 100%;
+}
+.recipe_box {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+}
+.recipe_title {
+    width: 90%;
+    font-size: 23px;
+    font-weight: 500;
+}
+.recipe {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+}
+.recipe .csimg {width: 40%;}
+.cheese_img {
+    border-radius: 10px;
+}
+.recipe_text_box {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.recipe_me {
+    width: 90%;
+    margin: auto;
+
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    color: #555;
+}
+.recipe_flex {
+    width: 90%;
+    margin: auto;
+
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 500;
+}
+.recipe_flex ul {
+    list-style: auto;
+    padding-left: 20px;
+    box-sizing: border-box;
+}
+.source_box {
+    display: flex;
+    gap: 5px;
+    font-size: 13px;
+}
+
+
+@media (max-width: 700px) {
+    .recipe {flex-direction: column;}
+    .recipe_text_box, .recipe .csimg {width: 100%;}
+    .recipe .csimg {order: 1;}
+    .recipe_text_box {order: 2;}
+    .recipe_flex {width: 90%; align-items: flex-start;}
+}
+
+@media (max-width: 600px) {
+    .cs_img_box {height: 240px;}
+    .background_csimg {width: 100%;}
+    .bs_2, .bs_1 {
+        border-top-left-radius: 30px;
+        border-bottom-right-radius: 30px;
+    }
+    .main_cheese_box {gap: 80px;}
+    .cheese_recipe_box  {gap: 30px;}
+    .title {font-size: 23px;}
+    .recipe_title {font-size: 20px;}
+    .line {width: 50%;}
+    .recipe_text_box {gap: 15px;}
+    .cheese_recipe_box {gap: 50px;}
+    .csimg_after {
+        width: 30px;
+        height: 60px;
+    }
+    .recipe_me {font-size: 14px;}
+    .source_box {font-size: 10px;}
+}
+
+@media (max-width: 450px) {
+    .source_box {
+        flex-direction: column; gap: 2px;
+        align-items: center;
+    }
+    .slash {display: none;}
+    .cheese_recipe_box {font-size: 15px;}
+    .cs_text_box {gap: 20px;}
+    .story div {font-size: 15px;}
+    .story_ul {font-size: 14px;}
+    .cheese_recipe_box {gap: 40px;}
+}
+
+@media (max-width: 400px) {
+    .main_cheese_box {margin: 40px 0 ;}
+    .cs_img_box {
+        height: 180px;
+        gap: 10px;
+    }
+    .cs_story_box {gap: 30px;}
+    .cheese_recipe_box, .story div {font-size: 14px;}
+    .recipe_me, .story_ul {font-size: 13px;}
+    .csimg_after {
+        width: 25px;
+        height: 50px;
+        top: -20px;
+        left: 45%;
+    }
+}
+
+@media (max-width: 300px) {
+    .cs_img_box {
+        height: 410px;
+        gap: 40px;
+        flex-direction: column;
+    }
+    .cheese_recipe_box {
+        gap: 20px;
+    }
+    .recipe_title {
+        font-size: 18px;
+    }
+}

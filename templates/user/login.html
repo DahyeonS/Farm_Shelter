@@ -1,0 +1,60 @@
+{% include 'alert.html' %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인</title>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+</head>
+<body>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'css/user/login.css' %}">
+    <link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css" rel="stylesheet">
+    <script src="{% static 'js/common.js' %}"></script>
+    
+    <div class="wrap">
+        <header class="login_header">
+            <div class="logo">
+                <a href="{% url 'index' %}">
+                    <img src="../../static/img/common/logo_photo.png" alt="logo.png">
+                </a>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="main_container">
+                <div class="login_box">
+                    <div class="login_title">
+                        Login
+                    </div>
+                    <div class="login_form">
+                        <form method="post" action="{% url 'login' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{ next }}">
+                            {% include 'user/login_error.html' %}
+                            <div>
+                                <input placeholder="Id" type="text" name="username" value="{{ form.username.value|default_if_none:'' }}">
+                            </div>
+                            <div>
+                                <input placeholder="Password" type="password" name="password" value="{{ form.password.value|default_if_none:'' }}">
+                            </div>
+                            <button type="submit">로그인</button>
+                            <div class="ext_login">
+                                <span class="login_css_text">
+                                    <a href="{% url 'register' %}">회원가입</a>
+                                    <span class="id_pw_reset">
+                                        <a href="search_username" style="margin-right: 10px;">아이디 찾기</a>  
+                                        <a href="../password_reset">비밀번호 찾기</a> 
+                                    </span>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

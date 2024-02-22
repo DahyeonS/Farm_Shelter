@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <title>목장 상세 - {{name}}</title>
+    <script>
+        const story = '{{story}}'
+        const special = '{{special}}'
+        const link = '{{link}}'
+        const url_zip = '{{url}}'
+    </script>
+</head>
+<body>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cheese/cheese_note.css' %}">
+    <link rel="stylesheet" href="{% static 'css/farm/farm.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="{% static 'js/common.js' %}"></script>
+    <script src="{% static 'js/farm/farm.js' %}"></script>
+    
+    <a href="" class="top_button_box">
+        <span>TOP</span>
+    </a>
+
+    <div class="wrap">
+        <header class="head">
+            {% include 'header.html' %}
+        </header>
+
+        <div class="main">
+            <div class="home_link">
+                <div class="main_container">
+                    <div class="hl_box">
+                        <span class="linkb"><a href="{% url 'index' %}">홈</a> / </span>
+                        <span class="linkb"><a href="{% url 'farm' %}">낙농체험 목장</a> / </span>
+                        <span class="linkb">{{name}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main_container">
+                <div class="main_farm_box">
+                    <div class="farm_story_box">
+                        <div class="title_box">
+                            <div class="title">
+                                <img src="{% static 'img/common/test_line.png' %}" alt="형광펜 중요표시" class="import_part">
+                                <span>" {{name}} "</span>
+                            </div>
+                        </div>
+                        <div class="story_box" id="story"></div>
+                    </div>
+                    <div class="farm_story_map_box_flex">
+                        <div class="farm_special_box" id="special"></div>
+                        <div class="farm_map_box">
+                            <div class="recipe_title">{{name}} 주소</div>
+                            {{map | safe}}
+                        </div>
+                    </div>
+                    <div class="farm_logo_link_box" id="link"></div>
+                </div>
+            </div>
+        </div>
+
+        {% include 'footer.html' %}
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,517 @@
+/* 별점 */
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+.rate {
+    display: inline-block;
+    border: 0;
+    margin-right: 15px;
+}
+.rate > input {
+    display: none;
+}
+.rate > label {
+    float: right;
+    color: #ddd
+}
+.rate > label:before {
+    display: inline-block;
+    font-size: 1rem;
+    padding: .3rem .2rem;
+    margin: 0;
+    cursor: pointer;
+    font-family: FontAwesome;
+    content: "\f005 ";
+}
+.rate .half:before {
+    content: "\f089 ";
+    position: absolute;
+    padding-right: 0;
+}
+.rate input:checked ~ label, .rate label:hover,
+.rate label:hover ~ label {
+    color: #f73c32 !important;
+} 
+.rate input:checked + .rate label:hover,
+.rate input input:checked ~ label:hover,
+.rate input:checked ~ .rate label:hover ~ label,  
+.rate label:hover ~ input:checked ~ label {
+    color: #f73c32 !important;
+} 
+
+/* 투어 */
+form {
+    display: none;
+}
+iframe {
+    width: 100%;
+    max-width: 1200px;
+}
+.main_container > .tour_title {
+    color: #2c6e49;
+    justify-content: center;
+    font-size: 27px;
+}
+.main_container > .tour_title::before {
+    background-color: #2c6e49;
+    display: none;
+}
+.tour_all_box {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+.tour_title {
+    margin: 30px 0;
+}
+.tour_content_box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+.tour_s_box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 20px;
+    font-weight: 600;
+    margin: 20px 0;
+
+}
+.tour_s_box div:first-child {
+    background: #fff;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    color: #2c6e49;
+    border-radius: 10px;
+}
+.tour_s_box .ts_line_box {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #2c6e49;
+    z-index: -1;
+    transform: translate(0, -50%);
+    border-radius: 10px;
+}
+.tc_div {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-weight: 500;
+    padding-left: 20px;
+    box-sizing: border-box;
+}
+.tour_title_mini, .tc_div span {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.tour_title_mini::before, .tc_div span::before {
+    content: '';
+    display: inline-block;
+    width: 5px;
+    height: 10px;
+    background-color: #999;
+    border-radius: 10px;
+}
+.schedule_box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.schedule_ul {
+    margin-left: 40px;
+    list-style: circle;
+}
+.tel_box {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 20px 0;
+    box-sizing: border-box;
+}
+.tel_box img {
+    width: 30px;
+}
+.tour_title_mini {
+    font-weight: 500;
+}
+.precautions_ul {
+    list-style: circle;
+    padding: 0 40px;
+    box-sizing: border-box;
+    font-weight: 500;
+}
+.application_btn {
+    margin: 0 10px 30px 10px !important;
+}
+.application_btn, .list_btn {
+    padding: 10px 20px;
+    box-sizing: border-box;
+    display: inline-block;
+    margin: 30px 10px;
+    background: #2c6e49;
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 2px;
+}
+.list_btn {
+    width: 90px;
+    text-align: center;
+}
+
+/* 후기, 질문 */
+#question, #review {
+    margin-bottom: 50px;
+    padding: 30px 0;
+    box-sizing: border-box;
+    border-bottom: 1px solid #ddd;
+}
+.main_container {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+}
+.tour_list_box {
+    width: 100%;
+    display: flex;
+    gap: 30px;
+}
+.tour_total_box {
+    width: 50%;
+}
+.tour_box {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    text-align: center;
+    align-items: center;
+}
+.tour_list {
+    padding: 10px 20px;
+    box-sizing: border-box;
+    background: #ddd;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 2px;
+}
+.tour_list:hover {
+    background-color: #2c6e49;
+    color: #fff;
+}
+.tour_background {
+    width: 100%;
+    height: 500px;
+}
+
+@media (max-width: 800px) {
+    .tour_list_box {
+        flex-direction: column;
+        max-width: 100%;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+    .tour_total_box {width: 100%;}
+}
+
+@media (max-width: 500px) {
+    .tour_box {grid-template-columns: repeat(2, 1fr);}
+}
+
+@media (max-width: 300px) {
+    .tour_box {grid-template-columns: repeat(1, 1fr);}
+}
+
+/* swiper에서 가져온 css - cheese recipe */
+.tour_swiper {
+    position: relative;
+    height: 100%;
+
+    /* background: #eee; */
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #000;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+.tour_swiper .swiper {
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+}
+.tour_swiper .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+}
+.tour_swiper .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.swiper-button-prev.tour_button_prev:after,
+.swiper-rtl .swiper-button-next.tour_button_next:after {
+    content: '<' !important;
+    font-family: 'SCoreDream';
+    font-weight: 500;
+}
+.swiper-button-next.tour_button_next:after,
+.swiper-rtl .swiper-button-prev.tour_button_prev:after {
+    content: '>' !important;
+    font-family: 'SCoreDream';
+    font-weight: 500;
+}
+:root {
+    --swiper-theme-color: #333 !important;
+}
+
+/* tour.html css */
+.question_div, .question_reply_div,
+.review_reply_div, .review_div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 14px;
+}
+.reviwe_total_box {
+    border: 2px solid #ddd; 
+    border-radius: 3px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+.reply_close_btn, .reply_more_btn_box {
+    text-align: center;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.review_reply_div {
+    margin-bottom: 20px;
+}
+.question_flex_flex, .review_flex_flex {
+    display: flex;
+    gap: 30px;
+    justify-content: space-between;
+    padding: 5px 30px;
+    box-sizing: border-box;
+}
+.question_flex, .review_flex {
+    width: 100%;
+    display: flex;
+    padding: 5px 30px;
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+.line_span {
+    border-bottom: 1px solid #ddd;
+    flex-direction: row !important;
+}
+.user_flex {
+    display: flex;
+    gap: 30px;
+}
+.date_btn_box {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+.reply_box span:last-child input[type=button],
+.update_delete_btn input[type=button]{
+    padding: 5px 20px;
+    box-sizing: border-box;
+    border: none;
+    background: #efefef;
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 12px;
+    font-family: 'SCoreDream';
+    cursor: pointer;
+}
+.danger_btn {
+    background: red !important;
+    color: #fff;
+}
+.q_content, .r_content {
+    height: 100%;
+    max-height: 100px;
+    min-height: 50px;
+}
+.r_content_photo {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+.photo_box {
+    width: 100%;
+    max-width: 200px;
+    height: 100%;
+    max-height: 200px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.update_delete_btn {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 30px;
+    box-sizing: border-box;
+    gap: 30px;
+}
+.reply_box {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ddd;
+    background-color: #f7f7f7;
+}
+.reply_box span:last-child {
+    display: flex;
+    padding: 10px 30px;
+    box-sizing: border-box;
+    justify-content: space-between;
+}
+#qbutton, #rbutton, .write_btn {
+    font-family: 'SCoreDream';
+    text-align: center;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    background: #efefef;
+    border-radius: 2px;
+    cursor: pointer;
+    border: none;
+    color: #333;
+}
+#qbutton, #rbutton {
+    background-color: #2c6e49; 
+    color: #fff;
+    margin: 20px 0 20px 10px;
+}
+.button_box {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+textarea {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    outline: none;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+.multibox {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+.file_update_box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.multibox form {
+    flex-direction: column;
+    gap: 10px;
+    align-items: self-start;
+}
+.file_update_box input {
+    width: auto !important;
+    cursor: pointer;
+}
+.multibox form input {
+    border: none;
+    border-radius: 2px;
+    padding: 8px 15px;
+    box-sizing: border-box;
+    outline: none;
+    font-family: 'ScoreDream';
+    color: #333;
+    background: #efefef;
+    width: auto !important;
+}
+.multibox .danger_btn {
+    width: 60px;
+}
+
+/* addclass */
+.none_btn {
+    display: none;
+}
+
+@media (max-width: 1200px) {
+    .main_container {
+        max-width: 100%;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+}
+
+@media (max-width: 800px) {
+    .tour_s_box .ts_line_box {display: none;}
+    .tour_s_box {
+        border-left: 10px solid #2c6e49;
+        border-right: 10px solid #2c6e49;
+        box-sizing: border-box;
+        border-radius: 10px;
+    }
+    .tour_s_box div:first-child {
+        display: flex;
+        gap: 5px;
+        flex-direction: column;
+        align-items: center;
+    }
+    .list_btn {margin: 0;}
+    .tour_background {height: 400px;}
+}
+
+@media (max-width:500px) {
+    .tc_div {font-size: 14px;}
+    .tour_content_box {padding: 0;}
+    .tour_s_box {font-size: 17px;}
+    .list_btn {width: 100%;}
+    .tour_title {font-size: 20px;}
+    .user_flex {justify-content: space-between;}
+    .question_flex_flex, .review_flex_flex {
+        flex-direction: column;
+        gap: 10px;
+        padding: 5px 20px
+    }
+    .tour_background {height: 300px;}
+}
+
+@media (max-width: 300px) {
+    .tc_div {padding: 0;}
+    .tour_title_mini::before, .tc_div span::before {display: none;}
+    .tour_background {height: 200px;}
+}

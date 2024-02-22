@@ -1,0 +1,72 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+<script src="{% static 'js/common.js' %}"></script>
+<link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css" rel="stylesheet">
+    <div class="logo_box header_white">
+        <div class="header_container">
+            <div class="logo">
+                <a href="{% url 'index' %}">
+                    <img src="{% static 'img/common/logo.png' %}" alt="logo.png">
+                </a>
+            </div>
+            <ul>
+                <li class="head_li head_li_color"><a href="{% url 'cheese' %}">치즈 사전</a> </li>
+                <li class="head_li head_li_color"><a href="{% url 'farm' %}">낙농체험 목장</a></li>
+                <li class="head_li head_li_color"><a href="{% url 'tour' %}">투어 예약</a></li>
+                {% if user.is_active %} <!-- 로그인 되었을때 logout 버튼 보이기 -->
+                    <li class="head_li head_li_color"><a href="{% url 'logout' %}">로그아웃</a></li>
+                {% else %}
+                    <li class="head_li head_li_color"><a href="{% url 'login' %}">로그인</a></li>
+                {% endif %}
+                <li class="head_li">
+                    <img src="{% static 'img/common/mypage_icon_2.png' %}" alt="마이페이지 아이콘" class="mypage">
+                </li>
+                <li class="li_side_menu_box">
+                    <ul>
+                        {% if user.is_active %}
+                            <li class="side_menu_li"><a href="{% url 'check_password' %}?next=reservation">투어 예약 확인</a></li>
+                            <li class="side_menu_li"><a href="{% url 'check_password' %}?next=modify">회원정보 수정</a></li>
+                        {% else %}
+                            <li class="side_menu_li"><a href="{% url 'nonmember' %}">투어 예약 확인</a></li>
+                            <li class="side_menu_li"><a href="{% url 'register' %}">회원가입</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+            </ul>
+            <div class="ham_button">
+                <img src="{% static 'img/common/ham.png' %}" alt="hambuger">
+            </div>
+            <div class="mobile_ham_box">
+                {% if user.is_active %}
+                    <div class="myid_div">
+                        <span>
+                            {% if user.username %}
+                                <b>{{ user.username }}</b> 님
+                            {% else %}
+                                <b>{{ user.id }}</b> 님
+                            {% endif %}
+                        </span>
+                    </div>
+                {% else %}
+                    <div class="myid_div">
+                        <span><a href="{% url 'login' %}">로그인 해주세요</a></span>
+                    </div>
+                {% endif %}
+                <div class="ham_li ham_li_color"><a href="{% url 'cheese' %}">치즈 사전</a></div>
+                <div class="ham_li ham_li_color"><a href="{% url 'farm' %}">낙농체험 목장</a></div>
+                <div class="ham_li ham_li_color"><a href="{% url 'tour' %}">투어 예약</a></div>
+                {% if user.is_active %}
+                    <div class="ham_li ham_li_color"><a href="{% url 'check_password' %}?next=reservation">투어 예약 확인</a></div>
+                    <div class="ham_li ham_li_color"><a href="{% url 'check_password' %}?next=modify">회원정보 수정</a></div>
+                {% endif %}
+                <div class="last_box">
+                    {% if user.is_active %}
+                        <div class="ham_li ham_li_color"><a href="{% url 'logout' %}">로그아웃</a></div>
+                    {% else %}
+                        <div class="ham_li ham_li_color"><a href="{% url 'nonmember' %}">투어 예약 확인</a></div>
+                        <div class="ham_li ham_li_color"><a href="{% url 'register' %}">회원가입</a></div>
+                    {% endif %}
+                </div> 
+            </div>
+        </div>
+    </div>

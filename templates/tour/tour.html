@@ -1,0 +1,259 @@
+{% include 'alert.html' %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="csrf_token" content="{{ csrf_token }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <title>목장투어 상세</title>
+    <script>
+        const code = '{{code}}'
+        const username = '{{user.username}}'
+    </script>
+</head>
+<body>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'css/user/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/user/reservation.css' %}">
+    <link rel="stylesheet" href="{% static 'css/tour/tour.css' %}">
+    <link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/tour/tour.css' %}">
+    <script src="{% static 'js/common.js' %}"></script>
+    <script src="{% static 'js/tour/tour.js' %}"></script>
+
+    <div class="wrap">
+        <header class="login_header">
+            <div class="logo">
+                <a href="{% url 'index' %}">
+                    <img src="{% static 'img/common/logo_photo.png' %}" alt="logo.png">
+                </a>
+            </div>
+        </header>
+
+        <main class="main" style="margin-bottom: 65px;">
+            <div class="main_container">
+                <div class="tour_title">{{name}}</div>
+                <a href="../reservate/{{id}}" class="application_btn">신청하기</a>
+                <div class="tour_all_box">
+                    <div class="tour_content_box"></div>
+                    <div>
+                        <div class="tour_title">지도 보기</div>
+                        {{map|safe}}
+                    </div>
+                    <a href="{% url 'tour' %}" class="list_btn">목록보기</a>
+                    <div class="tour_detail_review_box">
+                        <div class="tour_title">후기</div>
+                        <div class="tour_review_box">
+                            <input type="button" value="작성하기" id="rbutton">
+                            <form id="review" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <fieldset class="rate">
+                                    <input type="radio" id="rating10" name="rating" value="5.0"><label for="rating10"></label>
+                                    <input type="radio" id="rating9" name="rating" value="4.5"><label class="half" for="rating9"></label>
+                                    <input type="radio" id="rating8" name="rating" value="4.0"><label for="rating8"></label>
+                                    <input type="radio" id="rating7" name="rating" value="3.5"><label class="half" for="rating7"></label>
+                                    <input type="radio" id="rating6" name="rating" value="3.0"><label for="rating6"></label>
+                                    <input type="radio" id="rating5" name="rating" value="2.5"><label class="half" for="rating5"></label>
+                                    <input type="radio" id="rating4" name="rating" value="2.0"><label for="rating4"></label>
+                                    <input type="radio" id="rating3" name="rating" value="1.5"><label class="half" for="rating3"></label>
+                                    <input type="radio" id="rating2" name="rating" value="1.0"><label for="rating2"></label>
+                                    <input type="radio" id="rating1" name="rating" value="0.5"><label class="half" for="rating1"></label>
+                                </fieldset>
+                                <textarea name="content" cols="30" rows="10"></textarea>
+                                <div class="file_update_box">
+                                    <input type="file" name="photo" multiple>
+                                    <input type="button" value="작성하기" onclick="writeReview({{id}});">
+                                </div>
+                            </form>
+                            <div>
+                                {% if review %}
+                                    {% for r in review %}
+                                        <div>
+                                            <div>
+                                                <div class="reviwe_total_box">
+                                                    <div id="review{{r.id}}" class="review_div">
+                                                        <div class="line_span review_flex_flex">
+                                                            <div class="user_flex">
+                                                                <span>{{r.user.username}}</span>
+                                                                <span>{{r.rate}}</span>
+                                                            </div>
+                                                            <div class="date_btn_box">
+                                                                <span style="font-size: 12px;">
+                                                                    {% if r.modified_date %}
+                                                                            {{r.modified_date|date:'Y년 n월 j일 A G:i'}} <!-- 수정일자 -->
+                                                                    {% else %}
+                                                                            {{r.created_date|date:'Y년 n월 j일 A G:i'}}  <!-- 작성일자 -->
+                                                                    {% endif %}
+                                                                </span>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="review_flex">
+                                                            <span class="r_content">{{r.content}}</span>
+                                                            <span class="r_content_photo">
+                                                                {% for photo in review_photo %}
+                                                                    {% if photo %}
+                                                                        {% for p in photo %}
+                                                                            {% if p.review.id == r.id %}
+                                                                                <img src="../../media/{{p.photo}}" class="photo_box">
+                                                                            {% endif %}
+                                                                        {% endfor %}
+                                                                    {% endif %}
+                                                                {% endfor %}
+                                                            </span>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <span class="update_delete_btn">
+                                                        {% if r.user.username == user.username or user.username == 'admin' %}
+                                                            <input type="button" value="수정" id="rupdate{{r.id}}" onclick="showReviewUpdate({{r.id}}, {{r.rate}});">
+                                                            <div class="multibox">
+                                                                <form id="review_update{{r.id}}" enctype="multipart/form-data">
+                                                                    {% csrf_token %}
+                                                                    <fieldset class="rate">
+                                                                        <input type="radio" id="rating{{r.id}}update10" name="rating" value="5"><label for="rating{{r.id}}update10"></label>
+                                                                        <input type="radio" id="rating{{r.id}}update9" name="rating" value="4.5"><label class="half" for="rating{{r.id}}update9"></label>
+                                                                        <input type="radio" id="rating{{r.id}}update8" name="rating" value="4"><label for="rating{{r.id}}update8"></label>
+                                                                        <input type="radio" id="rating{{r.id}}update7" name="rating" value="3.5"><label class="half" for="rating{{r.id}}update7"></label>
+                                                                        <input type="radio" id="rating{{r.id}}update6" name="rating" value="3"><label for="rating{{r.id}}update6"></label>
+                                                                        <input type="radio" id="rating{{r.id}}update5" name="rating" value="2.5"><label class="half" for="rating{{r.id}}update5"></label>
+                                                                        <input type="radio" id="rating{{r.id}}update4" name="rating" value="2"><label for="rating{{r.id}}update4"></label>
+                                                                        <input type="radio" id="rating{{r.id}}update3" name="rating" value="1.5"><label class="half" for="rating{{r.id}}update3"></label>
+                                                                        <input type="radio" id="rating{{r.id}}update2" name="rating" value="1"><label for="rating{{r.id}}update2"></label>
+                                                                        <input type="radio" id="rating{{r.id}}update1" name="rating" value="0.5"><label class="half" for="rating{{r.id}}update1"></label>
+                                                                    </fieldset>
+                                                                    <textarea name="content" cols="30" rows="10">{{r.content}}</textarea>
+                                                                    첨부파일 변경 시 기존 파일은 삭제됩니다.
+                                                                    <label><input type="checkbox" name="fileDelete">첨부파일 삭제</label>
+                                                                    <div class="file_update_box">
+                                                                        <input type="file" name="photo" multiple>
+                                                                        <input type="button" value="수정" onclick="updateReview({{r.id}});">
+                                                                    </div>
+                                                                </form>
+                                                                <input type="button" value="삭제" onclick="deleteReview({{r.id}});" class="danger_btn">
+                                                            </div>
+                                                        {% endif %}
+                                                    </span>
+                                                </div>
+                                                <div class="button_box">
+                                                    <div type="button" class="reply_more_btn_box review_more" id="more{{r.id}}">
+                                                        <div class="r_more_btn"></div>
+                                                    </div>
+                                                    <input type="button" value="답글 작성" id="rrwrite{{r.id}}" onclick="showRReply({{r.id}});" class="write_btn">
+                                                </div>
+                                            </div>                                                         
+                                            <div id="review_reply{{r.id}}" class="review_reply_div"></div>
+                                            {% if user.is_active %}
+                                                <form id="rReply{{r.id}}" style="margin-bottom: 50px;">
+                                                    {% csrf_token %}
+                                                    <textarea name="content" cols="30" rows="10"></textarea>
+                                                    <input type="button" value="등록" onclick="writeRReply({{r.id}});">
+                                                </form>
+                                            {% endif %}
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    작성된 후기가 없습니다.
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tour_detail_review_box">
+                        <div class="tour_title">질문</div> 
+                        <input type="button" value="작성하기" id="qbutton">
+                        <form id="question" enctype="multipart/form-data">
+                            <textarea name="content" cols="30" rows="10"></textarea>
+                            <div class="file_update_box">
+                                <input type="file" name="photo">
+                                <input type="button" value="작성하기" onclick="writeQuestion({{id}});">
+                            </div>
+                        </form>
+                        <div>
+                            {% if question %}
+                                {% for q in question %}
+                                <div>
+                                    <div>
+                                        <div class="reviwe_total_box">
+                                            <div id="question{{q.id}}" class="question_div">
+                                                <div class="line_span question_flex_flex">
+                                                    <div class="user_flex">
+                                                        <span>{{q.user.username}}</span>
+                                                    </div>
+                                                    <div class="date_btn_box">
+                                                        <span style="font-size: 12px;">
+                                                            {% if q.modified_date %}
+                                                                    {{q.modified_date|date:'Y년 n월 j일 A G:i'}} <!-- 수정일자 -->
+                                                            {% else %}
+                                                                    {{q.created_date|date:'Y년 n월 j일 A G:i'}}  <!-- 작성일자 -->
+                                                            {% endif %}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="question_flex">
+                                                    <span class="r_content">{{q.content}}</span>
+                                                    <span>
+                                                        {% for photo in question_photo %}
+                                                            {% if photo %}
+                                                                {% for p in photo %}
+                                                                    {% if p.question.id == q.id %}
+                                                                        <img src="../../media/{{p.photo}}" alt="" class="photo_box">
+                                                                    {% endif %}
+                                                                {% endfor %}
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <span class="update_delete_btn">
+                                                {% if q.user.username == user.username or user.username == 'admin' %}
+                                                    <input type="button" value="수정" id="qupdate{{q.id}}" onclick="showQuestionUpdate({{q.id}});">
+                                                    <div class="multibox">
+                                                        <form id="question_update{{q.id}}" enctype="multipart/form-data">
+                                                            {% csrf_token %}
+                                                            <textarea name="content" cols="30" rows="10">{{q.content}}</textarea>
+                                                            첨부파일 변경 시 기존 파일은 삭제됩니다.
+                                                            <label><input type="checkbox" name="fileDelete">첨부파일 삭제</label>
+                                                            <div class="file_update_box">
+                                                                <input type="file" name="photo" multiple>
+                                                                <input type="button" value="수정" onclick="updateQuestion({{q.id}});">
+                                                            </div>
+                                                        </form>
+                                                        <input type="button" value="삭제" onclick="deleteQuestion({{q.id}});" class="danger_btn">
+                                                        
+                                                    </div>
+                                                {% endif %}
+                                            </span>
+                                        </div>
+                                        <div class="button_box">
+                                            <div type="button" class="reply_more_btn_box question_more" id="more{{q.id}}">
+                                                <div class="r_more_btn"></div>
+                                            </div>
+                                            <input type="button" value="답글 작성" id="qrwrite{{q.id}}" onclick="showQReply({{q.id}});" class="write_btn">
+                                        </div>
+                                        <div id="question_reply{{q.id}}" class="question_reply_div"></div>
+                                        {% if user.is_active %}
+                                            <form id="qReply{{q.id}}" style="margin-bottom: 50px;">
+                                                {% csrf_token %}
+                                                <textarea name="content" cols="30" rows="10"></textarea>
+                                                <input type="button" value="등록" onclick="writeQReply({{q.id}});">
+                                            </form>
+                                        {% endif %} 
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            {% else %}
+                                작성된 질문이 없습니다.
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

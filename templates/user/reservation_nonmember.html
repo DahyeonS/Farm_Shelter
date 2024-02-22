@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>예약 내역</title>
+</head>
+<body>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/user/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/user/reservation_nonmember.css' %}">
+    <link rel="stylesheet" href="{% static 'css/user/reservation.css' %}">
+    <link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css" rel="stylesheet">
+    <script src="{% static 'js/common.js' %}"></script>
+
+    <div class="wrap">
+        <header class="login_header">
+            <div class="logo">
+                <a href="{% url 'index' %}">
+                    <img src="{% static 'img/common/logo_photo.png' %}" alt="logo.png">
+                </a>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="main_container">
+                <div class="tour_total_box">
+                    <div class="tour_title">목장 비회원 예약내역</div>
+
+                    <div class="tour_box">
+                        <div class="tour_table">
+                            {% for r in reservation %}
+                                <div class="nonmember_box">
+                                    <div class="non_item_box item_one">
+                                        <div><span>{{r.last_name}}{{r.first_name}}</span> 님의 예약</div>
+                                    </div>
+                                    <div class="non_item_box item_two">
+                                        <div>
+                                            <span>예약번호</span> {{r.num}}
+                                        </div>
+                                        <div>
+                                            <span>투어명</span> {{r.tour.name}}
+                                        </div>
+                                        <div>
+                                            <span>인원</span> {{r.people}}인
+                                        </div>
+                                        <div>
+                                            <span>예약일자</span> {{r.reserved_date|date:'Y년 n월 j일 A G:i'}}
+                                        </div>
+                                    </div>
+                                    {% if r.paid_date %}
+                                    <div class="non_item_box item_three three_size">
+                                        <div><span>결제일자</span> {{r.paid_date|date:'Y년 n월 j일 A G:i:s'}}</div>
+                                    </div>
+                                    {% else %}
+                                    <div class="non_item_box item_three">
+                                        <a href="{% url 'payment' r.id %}">결제하기</a>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </main>
+    </div>
+</body>
+</html>

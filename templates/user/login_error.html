@@ -1,0 +1,25 @@
+<!-- 로그인 실패 -->
+{% if form.errors %}
+    <div>
+    <!-- 필드 오류 -->
+    {% for field in form %}
+        {% if field.errors %}
+            {% if field.label != '비밀번호' %}
+                <div class="login_error">
+                    <strong>아이디를 입력하세요.</strong>
+                </div>
+                {% else %}
+                <div class="login_error">
+                    <strong>비밀번호를 입력하세요.</strong>
+                </div>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+    <!-- 넌필드 오류 -->
+    {% for error in form.non_field_errors %}
+        <div class="login_error">
+            <strong>아이디 또는 비밀번호가 잘못되었습니다.</strong>
+        </div>
+    {% endfor %}
+    </div>
+{% endif %}

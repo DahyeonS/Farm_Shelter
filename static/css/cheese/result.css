@@ -1,0 +1,191 @@
+/* 공통 */
+body {
+    font-family: 'ScoreDream';
+    color: #333;
+}
+main {
+    margin-bottom: 100px;
+}
+.cc_explanation_box, .cheese_correct_box,
+.cheese_result_box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.cc_title,
+.cc_title_box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cheese_result_box {
+    gap: 100px;
+}
+.cheese_correct_box {
+    gap: 30px;
+}
+.cc_explanation_box {
+    gap: 30px;
+}
+.cc_title {
+    gap: 10px;
+}
+.cc_title div {
+    display: flex;
+    align-items: center;
+}
+.cc_title_box {
+    gap: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    font-weight: 500;
+}
+.quote {
+    width: 80px;
+    opacity: 0.5;
+}
+.left_quote {
+    transform: rotateY(180deg);
+}
+.oneTextBox {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 20px 30px;
+    box-sizing: border-box;
+}
+.oneTextBox img {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    z-index: -5;
+}
+.cc_e_text_box {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.cc_e_other_cheese_box {
+    font-weight: 500;
+    color: #888;
+}
+.cc_e_pic_box {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+.pic_box {
+    width: 50%;
+    height: 400px;
+    border-radius: 10px;
+}
+.cheese_others_box {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.cheese_four_box, .cheese_three_box,
+.cheese_two_box {
+    width: calc(100% / 3);
+    display: none;
+}
+.co_img_box {
+    width: 100%;
+    height: 300px;
+    border-radius: 10px;
+}
+.co_text_box {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    font-weight: 500;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+.cheese_result_line {
+    width: 10px;
+    height: 200px;
+    background: #ffc9b9;
+    border-radius: 30px;
+    margin-top: 30px;
+}
+#result_line_1, #result_line_2 {
+    display: none;
+}
+.cheese_detail_btn {
+    width: 40%;
+    margin: auto;
+}
+.cheese_detail_btn a {
+    width: 100%;
+    display: inline-block;
+
+    border: none;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    font-size: 13px;
+    color: #888;
+    font-family: 'ScoreDream';
+    background: #ffc9b9;
+    cursor: pointer;
+    text-align: center;
+}
+
+@media (max-width: 900px) {
+    .co_img_box {height: 200px;}
+}
+
+@media (max-width: 700px) {
+    .co_text_box {flex-direction: column;}
+    .cc_title_box {font-size: 23px;}
+    .quote {width: 60px;} 
+    .cheese_result_line {
+        height: 150px;
+        margin-top: 60px;
+    }   
+    .pic_box {height: 300px;}
+}
+
+@media (max-width: 600px) {
+    .cc_title {flex-direction: column;}
+    .oneTextBox {padding: 5px 30px;}
+    .cc_e_text_box {font-size: 14px;}
+    .co_text_box {font-size: 15px;}
+    .co_img_box {height: 150px;}
+    .cheese_result_line {
+        height: 80px;
+        margin-top: 60px;
+    }
+    .cheese_result_box {gap: 60px;}
+}
+
+@media (max-width: 450px) {
+    .cheese_result_box {gap: 80px;}
+    .pic_box {height: 250px;}
+    .cheese_others_box {flex-direction: column; gap: 30px;}
+    .cheese_four_box, .cheese_three_box, .cheese_two_box {width: 100%;}
+    .co_text_box {flex-direction: row;}
+    .co_img_box {height: 250px;}
+    .cheese_result_line {
+        width: 40%;
+        height: 5px;
+        margin-top: 0 ;
+    }
+    .cheese_detail_btn {width: 100%;}
+}
+
+@media (max-width: 300px) {
+    .cheese_result_box {gap: 60px;}
+    .cc_title_box {flex-direction: column;}
+    .quote {width: 40px; gap: 10px;}
+    .cc_title {gap: 5px; font-size: 22px;}
+    .cc_e_pic_box {flex-direction: column;}
+    .pic_box {height: 200px; width: 100%;}
+}

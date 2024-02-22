@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>치즈 상세 - {{name}}</title>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script>
+        const story = '{{story}}'
+        const recipe = '{{recipe}}'
+        const url_zip = '{{url}}'
+        const url_1 = url_zip.split(', ')[0]
+        const url_2 = url_zip.split(', ')[1]
+    </script>
+</head>
+<body>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cheese/cheese_note.css' %}">
+    <script src="{% static 'js/common.js' %}"></script>
+    <script src="{% static 'js/cheese/cheese_note.js' %}"></script>
+    
+    <div class="wrap">
+        <header class="head">
+            {% include 'header.html' %}
+        </header>
+
+        <main class="main">
+            <div class="home_link">
+                <div class="main_container">
+                    <div class="hl_box">
+                        <span class="linkb"><a href="{% url 'index' %}">홈</a> / </span>
+                        <span class="linkb"><a href="{% url 'cheese' %}">Cheese Book</a> / </span>
+                        <span class="linkb">{{name}} 치즈</span>
+                    </div>
+                </div>
+            </div>
+            <div class="main_container">
+                <div class="main_cheese_box">
+                    <div class="cheese_story_box">
+                        <div class="title_box">
+                            <div class="title">
+                                <img src="../../static/img/common/test_line.png" alt="형광펜 중요표시" class="import_part">
+                                <span>" {{name}} 치즈 "</span>
+                            </div>
+                        </div>
+                        <div class="cs_story_box">
+                            <div class="cs_img_box">
+                                <div class="csimg background_csimg bs_1">
+                                    <span class="csimg_after"></span>
+                                </div>
+                                <div class="csimg background_csimg bs_2">
+                                    <span class="csimg_after"></span>
+                                </div>
+                            </div>
+                            <div class="cs_text_box" id="story"></div>
+                        </div>
+                        <div class="cheese_recipe_box" id="recipe"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        {% include 'footer.html' %}
+    </div>
+    
+</body>
+</html>

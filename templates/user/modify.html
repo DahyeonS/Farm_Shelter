@@ -1,0 +1,67 @@
+{% include 'alert.html' %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원정보 수정</title>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script>
+        function deleteConfirm() {
+            const input = confirm('회원을 정말로 탈퇴하겠습니까?')
+            if (input) location.href = '{% url "check_password" %}?next=delete'
+        }
+    </script>
+</head>
+<body>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'css/user/login.css' %}">
+    <link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css" rel="stylesheet">
+    <script src="{% static 'js/common.js' %}"></script>
+    
+    <div class="wrap">
+        <header class="login_header">
+            <div class="logo">
+                <a href="{% url 'index' %}">
+                    <img src="{% static 'img/common/logo_photo.png' %}" alt="logo.png">
+                </a>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="main_container">
+                <div class="login_box">
+                    <div class="login_title">
+                        회원 정보 수정
+                    </div>
+                    <div class="login_form">
+                        <form method="post">
+                            {% csrf_token %}
+                            ID [ {{ user.username }} ]
+                            <label for="email">이메일</label>
+                            <input placeholder="Email" type="text" name="email" value="{{ user.email }}">
+                            {% if form.email.errors %}
+                                {% for error in form.email.errors %}
+                                    <div class="login_error">
+                                        <strong>{{error}}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                            <input placeholder="First name" type="text" name="last_name" value="{{ user.last_name|default_if_none:'' }}">
+                            <input placeholder="Last name" type="text" name="first_name" value="{{ user.first_name|default_if_none:'' }}">
+                            <input type="submit" value="수정하기" class="submit">
+                        </form>
+                        <div class="ext_login modify_ext">
+                            <span class="login_css_text">
+                                <a href="modify_password">비밀번호 변경</a>
+                                <a href="javascript:void(0)" onclick="deleteConfirm()">회원탈퇴</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,114 @@
+{% include 'alert.html' %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <title>예약 내역</title>
+    <script>
+        function updateConfirm(id) {
+            const input = confirm('예약을 변경하시겠습니까?')
+            if (input) location.href = 'modify_reservation/' + id;
+        }
+    </script>
+</head>
+<body>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/user/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/user/reservation.css' %}">
+    <link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css" rel="stylesheet">
+    <script src="{% static 'js/common.js' %}"></script>
+    <script src="{% static 'js/user/reservation.js' %}"></script>
+
+    <div class="wrap">
+        <header class="login_header">
+            <div class="logo">
+                <a href="{% url 'index' %}">
+                    <img src="{% static 'img/common/logo_photo.png' %}" alt="logo.png">
+                </a>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="main_container">
+                <div class="tour_total_box">
+                    <div class="tour_title">목장 예약내역</div>
+                    <div class="tour_box">
+                        <h3>※ 예약 후 7일 이내에 결제하지 않으면 예약이 취소됩니다.</h3>
+                        <div class="tour_table desk_size">
+                            <div class="tour_thead">
+                                <div class="tour_tr">
+                                    <div class="tour_td">예약번호</div>
+                                    <div class="tour_td">성함</div>
+                                    <div class="tour_td">투어명</div>
+                                    <div class="tour_td">인원수</div>
+                                    <div class="tour_td">예약일</div>
+                                    <div class="tour_td">결제일</div>
+                                    <div class="tour_td">&nbsp;</div>
+                                </div>
+                            </div>
+                            <div class="tour_tbody">
+                                {% for r in reservation %}
+                                    <div class="tour_tr tbody_tr">
+                                        <div class="tour_td">{{r.num}}</div>
+                                        <div class="tour_td tbody_td">{{r.last_name}}{{r.first_name}}</div>
+                                        <div class="tour_td tbody_td">
+                                            <a href="{% url 'tour_detail' r.tour.id %}" target="_blank">{{r.tour.name}}</a>
+                                        </div>
+                                        <div class="tour_td tbody_td">{{r.people}}</div>
+                                        <div class="tour_td tbody_td" style="font-size: 13px;">{{r.reserved_date|date:'Y년 n월 j일 A G:i'}}</div>
+                                        <div class="tour_td tbody_td" style="font-size: 13px;">
+                                            {% if r.paid_date == None %}
+                                                <a href="{% url 'payment' r.id %}">미결제</a>
+                                            {% else %}
+                                                {{r.paid_date|date:'Y년 n월 j일 A G:i'}}
+                                            {% endif %}
+                                        </div>
+                                        <div class="tour_td tbody_td">
+                                            <a href="javascript:void(0);" onclick="updateConfirm({{r.id}});">변경</a>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="tour_mobile_table">
+                            {% for r in reservation %}
+                                <div class="tm_box">
+                                    <div class="tm_text_box">
+                                        <div class="tm_op_number_box">
+                                            <div class="tm_td date_text">{{r.reserved_date|date:'Y년 n월 j일 A G:i'}}</div>
+                                            <div class="tm_op_name_box">
+                                                <div class="tm_td" style="font-weight: 600;">
+                                                    <a href="{% url 'tour_detail' r.tour.id %}" target="_blank">{{r.tour.name}}</a>
+                                                </div>
+                                                <div class="tm_td"><span>{{r.last_name}}{{r.first_name}}</span>님</div>
+                                                <div class="tm_td"><span>{{r.people}}</span>인</div>
+                                            </div>
+                                        </div>
+                                        <div class="tm_td" style="color: #4c956c;font-weight: 600;">{{r.num}}</div>
+                                    </div>
+                                    <div class="tm_check_box">
+                                        <div class="tm_td">
+                                            {% if r.paid_date == None %}
+                                                <a href="{% url 'payment' r.id %}">미결제</a>
+                                            {% else %}
+                                                변경 날짜 : {{r.paid_date|date:'Y년 n월 j일 A G:i'}}
+                                            {% endif %}
+                                        </div>
+                                        <div class="tm_td">
+                                            <a href="javascript:void(0);" onclick="updateConfirm({{r.id}});">변경</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

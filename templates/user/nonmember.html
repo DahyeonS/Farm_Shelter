@@ -1,0 +1,67 @@
+{% include 'alert.html' %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비회원 예약 조회</title>
+</head>
+<body>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'css/user/login.css' %}">
+    <link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css" rel="stylesheet">
+    <script src="{% static 'js/common.js' %}"></script>
+
+    <div class="wrap">
+        <header class="login_header">
+            <div class="logo">
+                <a href="{% url 'index' %}">
+                    <img src="../../static/img/common/logo_photo.png" alt="logo.png">
+                </a>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="main_container">
+                <div class="login_box">
+                    <div class="login_title">투어 비회원 예약조회</div>
+
+                    <div class="login_form">
+                        <form method="post">
+                            <h3 style="width: 100%;
+                                font-family: 'ScoreDream';
+                                margin: 0 0;
+                                color: #fb4141;
+                                font-size: 17px;">비회원은 조회만 가능합니다.</h3>
+                            {% csrf_token %}
+                            <input type="text" placeholder="Email" name="email" value="{{ form.email.value|default_if_none:'' }}">
+                            {% if form.email.errors %}
+                                {% for error in form.email.errors %}
+                                    <div class="login_error">
+                                        <strong>{{error}}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                            <input type="password" placeholder="Password" name="password" value="{{ form.password.value|default_if_none:'' }}">
+                            {% if form.password.errors %}
+                                {% for error in form.password.errors %}
+                                    <div class="login_error">
+                                        <strong>{{error}}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                            <input type="submit" value="조회" class="submit">
+                            <div class="ext_login">
+                                <div class="login_css_text">
+                                    <a href="{% url 'login' %}">로그인</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

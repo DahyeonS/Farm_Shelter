@@ -1,0 +1,64 @@
+{% include 'alert.html' %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="csrf_token" content="{{ csrf_token }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+    <title>결제</title>
+    <script>
+        impCode = '{{IMP_CODE}}'
+    </script>
+</head>
+<body>
+    {% load static %}
+    {% load mathfilters %}
+    {% load humanize %}
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/user/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/user/reservation.css' %}">
+    <link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css" rel="stylesheet">
+    <script src="{% static 'js/common.js' %}"></script>
+    <script src="{% static 'js/tour/payment.js' %}"></script>
+
+    <div class="wrap">
+        <header class="login_header">
+            <div class="logo">
+                <a href="{% url 'index' %}">
+                    <img src="{% static 'img/common/logo_photo.png' %}" alt="logo.png">
+                </a>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="main_container">
+                <div class="tour_total_box modify_tour">
+                    <div class="tour_title">목장예약 결제</div>
+                    <div class="tour_box">
+                        <form>
+                            <label for="name">성함</label>
+                            <input id="name" type="text" value="{{reservation.last_name}}{{reservation.first_name}}" readonly="readonly">
+                            <input type="hidden" id="email" value="{{reservation.user.email}}">
+                            <label for="tour_name">투어명</label>
+                            <input id="tour_name" type="text" value="{{reservation.tour.name}}" readonly="readonly">
+                            <input type="hidden" id="tour_id" value="{{reservation.tour.id}}">
+                            <input type="hidden" id="reservation_id" value="{{reservation.id}}">
+                            <label for="people">인원수</label>
+                            <input type="text" id="people" value="{{reservation.people}}명" readonly="readonly">
+                            <label for="price">결제금액</label>
+                            {% with price=reservation.tour.price people=reservation.people %}
+                            <input type="text" id="price" value="{{price|mul:people|intcomma}}원" readonly="readonly">
+                            {% endwith %}
+                            <input type="button" value="결제하기" class="submit" onclick="pay();">
+                            <input type="button" value="다음에 하기" class="submit" onclick="history.back();">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,386 @@
+{% include 'alert.html' %}
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>목장쉼터</title>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+</head>
+<body>
+    {% load static %}
+    {% include 'loading.html' %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="{% static 'js/index.js' %}"></script>
+    <script src="{% static 'js/common.js' %}"></script>
+
+    <a class="top_button_box">
+        <span>TOP</span>
+    </a>
+    <div class="wrap">
+        <header class="head">
+            <div class="logo_box">
+                <div class="header_container">
+                    <div class="logo">
+                        <a href="{% url 'index' %}">
+                            <img src="{% static 'img/common/logo4.png' %}" alt="logo.png">
+                        </a>
+                    </div>
+                    <ul>
+                        <li class="head_li"><a href="{% url 'cheese' %}">치즈 사전</a> </li>
+                        <li class="head_li"><a href="{% url 'farm' %}">낙농체험 목장</a></li>
+                        <li class="head_li"><a href="{% url 'tour' %}">투어 예약</a></li>
+                        {% if user.is_active %} <!-- 로그인 되었을때 logout 버튼 보이기 -->
+                            <li class="head_li"><a href="{% url 'logout' %}">로그아웃</a></li>
+                        {% else %}
+                            <li class="head_li"><a href="{% url 'login' %}">로그인</a></li>
+                        {% endif %}
+                        <li class="head_li">
+                            <img src="{% static 'img/common/mypage_icon.png' %}" alt="마이페이지 아이콘" class="mypage">
+                        </li>
+                        <li class="li_side_menu_box">
+                            <ul>
+                                {% if user.is_active %}
+                                <li class="side_menu_li"><a href="{% url 'check_password' %}?next=reservation">투어 예약 확인</a></li>
+                                <li class="side_menu_li"><a href="{% url 'check_password' %}?next=modify">회원정보 수정</a></li>
+                                {% else %}
+                                    <li class="side_menu_li"><a href="{% url 'nonmember' %}">투어 예약 확인</a></li>
+                                    <li class="side_menu_li"><a href="{% url 'register' %}">회원가입</a></li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="ham_button">
+                        <img src="{% static 'img/common/ham.png' %}" alt="hambuger">
+                    </div>
+                    <div class="mobile_ham_box">
+                        {% if user.is_active %}
+                            <div class="myid_div">
+                                <span>
+                                    {% if user.username %}
+                                        <b>{{ user.username }}</b> 님
+                                    {% else %}
+                                        <b>{{ user.id }}</b> 님
+                                    {% endif %}
+                                </span>
+                            </div>
+                        {% else %}
+                            <div class="myid_div">
+                                <span><a href="{% url 'login' %}">로그인 해주세요</a></span>
+                            </div>
+                        {% endif %}
+                        <div class="ham_li ham_li_color"><a href="{% url 'cheese' %}">치즈 사전</a></div>
+                        <div class="ham_li ham_li_color"><a href="{% url 'farm' %}">낙농체험 목장</a></div>
+                        <div class="ham_li ham_li_color"><a href="{% url 'tour' %}">투어 예약</a></div>
+                        {% if user.is_active %}
+                            <div class="ham_li ham_li_color"><a href="{% url 'check_password' %}?next=reservation">투어 예약 확인</a></div>
+                            <div class="ham_li ham_li_color"><a href="{% url 'check_password' %}?next=modify">회원정보 수정</a></div>
+                        {% endif %}
+                        <div class="last_box">
+                            {% if user.is_active %}
+                                <div class="ham_li ham_li_color"><a href="{% url 'logout' %}">로그아웃</a></div>
+                            {% else %}
+                                <div class="ham_li ham_li_color"><a href="{% url 'nonmember' %}">투어 예약 확인</a></div>
+                                <div class="ham_li ham_li_color"><a href="{% url 'register' %}">회원가입</a></div>
+                            {% endif %}
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <video class="head_video" autoplay muted loop playsinline poster="{% static 'img/farm/농도원목장/3.jpg' %}">
+                <source src="{% static 'img/video/pasture.mp4' %}" type="video/mp4">
+            </video>
+            <div class="icon">
+                <span class="circle">scroll down
+                    <img src="{% static 'img/down_icon2.png' %}">
+                </span>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="main_container">
+                <div class="cheese_make_box">
+                    <div class="cm_inner_box">
+                        <form action="cheese/result" method="post" enctype="multipart/form-data" id="cheese">
+                            {% csrf_token %}
+                            <input type="file" name="saveFile" id="upload" style="display: none;">
+                            <div class="cm_download_box"><img src="{% static 'img/common/download.png' %}" alt=""></div>
+                        </form>
+                        <div class="cm_text_box">
+                            <span>사진으로 AI가 알려주는 치즈</span>
+                            <div>이 치즈는 어떻게 만들어졌을까?</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cheese_recipe_box">
+                <div class="cr_title_box">
+                    <a href="{% url 'cheese' %}" class="desk_title">
+                        <span>치즈로</span> 
+                        <span>맛있는</span> 
+                        <span>요리</span> 
+                        <span>레시피</span>
+                    </a>
+                    <a href="{% url 'cheese' %}" class="mobile_title">
+                        <span>치즈로 맛있는</span>
+                        <span>요리 레시피</span>
+                    </a>
+                </div>
+
+                <div class="cr_swiper_box">
+                    <div class="cr_swiper">
+                        <div class="swiper mySwiper recipe">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide recipe_slide">
+                                    <a href="./cheese/detail/15">
+                                        <div class="cheese_background" style="background: url({% static 'img/recipe/asiago/1.webp' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide recipe_slide">
+                                    <a href="./cheese/detail/11">
+                                        <div class="cheese_background" style="background: url({% static 'img/recipe/blue/3.jpg' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide recipe_slide">
+                                    <a href="./cheese/detail/12">
+                                        <div class="cheese_background" style="background: url('{% static 'img/recipe/blueStilton/3.png' %}'); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide recipe_slide">
+                                    <a href="./cheese/detail/10">
+                                        <div class="cheese_background" style="background: url({% static 'img/recipe/brie/3.png' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide recipe_slide">
+                                    <a href="./cheese/detail/9">
+                                        <div class="cheese_background" style="background: url({% static 'img/recipe/burrata/1.jpg' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide recipe_slide">
+                                    <a href="./cheese/detail/17">
+                                        <div class="cheese_background" style="background: url({% static 'img/recipe/cheddar/2.jpg' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide recipe_slide">
+                                    <a href="./cheese/detail/16">
+                                        <div class="cheese_background" style="background: url({% static 'img/recipe/emmental/1.jpg' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide recipe_slide">
+                                    <a href="./cheese/detail/19">
+                                        <div class="cheese_background" style="background: url({% static 'img/recipe/fetta/1.jpg' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide recipe_slide">
+                                    <a href="./cheese/detail/1">
+                                        <div class="cheese_background" style="background: url({% static 'img/recipe/goda/goda1.jpg' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide recipe_slide">
+                                    <a href="./cheese/detail/2">
+                                        <div class="cheese_background" style="background: url({% static 'img/recipe/gorgonzola/1.jpg' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide recipe_slide">
+                                    <a href="./cheese/detail/13">
+                                        <div class="cheese_background" style="background: url({% static 'img/recipe/monastery/1.jpg' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide recipe_slide">
+                                    <a href="./cheese/detail/8">
+                                        <div class="cheese_background" style="background: url({% static 'img/recipe/monterey jack/1.jpg' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide recipe_slide">
+                                    <a href="./cheese/detail/7">
+                                        <div class="cheese_background" style="background: url({% static 'img/recipe/mozzarella/1.png' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide recipe_slide">
+                                    <a href="./cheese/detail/18">
+                                        <div class="cheese_background" style="background: url({% static 'img/recipe/parmesan/1.jpg' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide recipe_slide">
+                                    <a href="./cheese/detail/20">
+                                        <div class="cheese_background" style="background: url({% static 'img/recipe/provolone/1.jpg' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide recipe_slide">
+                                    <a href="./cheese/detail/4">
+                                        <div class="cheese_background" style="background: url({% static 'img/recipe/ricotta/3.jpg' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide recipe_slide">
+                                    <a href="./cheese/detail/3">
+                                        <div class="cheese_background" style="background: url({% static 'img/recipe/roquefort/1.jpg' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide recipe_slide">
+                                    <a href="./cheese/detail/14">
+                                        <div class="cheese_background" style="background: url({% static 'img/recipe/swiss/3.jpg' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- <div class="swiper-pagination"></div> -->
+                            <div class="swiper-button-next recipe_button_next"></div>
+                            <div class="swiper-button-prev recipe_button_prev"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main_container">
+                <div class="pasture_box">
+                    <div class="pasture_title_box">
+                        <a href="{% url 'farm' %}" class="pasture_title">낙농 체험 목장</a>
+                        <div class="pasture_description_box">
+                            <span>
+                                자연과 생명이 함께하며 살아숨쉬는 체험의 현장입니다. 싱그러운 자연의
+                                삶과 함께하는 목장에서의 체험은 생명의 신비와 함께 일의 소중함을 느낄 수
+                                있는 소중한 곳이기도 합니다. 살아있는 교육의 현장에서 학교에서는 배우기
+                                어려운 추억과 감동을 만들어보세요.
+                            </span>
+                            <br>
+                            <span><a href="{% url 'map' %}" class="farm_map">목장 지도 보기</a></span>
+                        </div>
+                    </div>
+
+                    <div class="pasture_swiper_box">
+                        <div class="pasture_swiper">
+                            <div class="swiper mySwiper pasture">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide pasture_slide">
+                                        <a href="./farm/detail/1">
+                                            <div class="pasture_background" style="background: url({% static 'img/farm/꿈목장/7.jpg' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                        </a>
+                                    </div>
+                                    <div class="swiper-slide pasture_slide">
+                                        <a href="./farm/detail/2">
+                                            <div class="pasture_background" style="background: url({% static 'img/farm/내화목장/3.png' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                        </a>
+                                    </div>
+                                    <div class="swiper-slide pasture_slide">
+                                        <a href="./farm/detail/3">
+                                            <div class="pasture_background" style="background: url({% static 'img/farm/농도원목장/3.jpg' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                        </a>
+                                    </div>
+                                    <div class="swiper-slide pasture_slide">
+                                        <a href="./farm/detail/4">
+                                            <div class="pasture_background" style="background: url({% static 'img/farm/다래목장/3.jpeg' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                        </a>
+                                    </div>
+                                    <div class="swiper-slide pasture_slide">
+                                        <a href="./farm/detail/5">
+                                            <div class="pasture_background" style="background: url({% static 'img/farm/대한목장/3.jpeg' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                        </a>
+                                    </div>
+                                    <div class="swiper-slide pasture_slide">
+                                        <a href="./farm/detail/6">
+                                            <div class="pasture_background" style="background: url({% static 'img/farm/모산목장/2.jpg' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                        </a>
+                                    </div>
+                                    <div class="swiper-slide pasture_slide">
+                                        <a href="./farm/detail/7">
+                                            <div class="pasture_background" style="background: url({% static 'img/farm/미르목장/5.jpeg' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                        </a>
+                                    </div>
+                                    <div class="swiper-slide pasture_slide">
+                                        <a href="./farm/detail/8">
+                                            <div class="pasture_background" style="background: url({% static 'img/farm/성동목장/2.PNG' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                        </a>
+                                    </div>
+                                    <div class="swiper-slide pasture_slide">
+                                        <a href="./farm/detail/9">
+                                            <div class="pasture_background" style="background: url({% static 'img/farm/신우목장/3.jpeg' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                        </a>
+                                    </div>
+                                    <div class="swiper-slide pasture_slide">
+                                        <a href="./farm/detail/10">
+                                            <div class="pasture_background" style="background: url({% static 'img/farm/신하늘목장/2.jpg' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                        </a>
+                                    </div>
+                                    <div class="swiper-slide pasture_slide">
+                                        <a href="./farm/detail/11">
+                                            <div class="pasture_background" style="background: url({% static 'img/farm/아침미소목장/3.jpeg' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                        </a>
+                                    </div>
+                                    <div class="swiper-slide pasture_slide">
+                                        <a href="./farm/detail/12">
+                                            <div class="pasture_background" style="background: url({% static 'img/farm/애심목장/4.jpeg' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                        </a>
+                                    </div>
+                                    <div class="swiper-slide pasture_slide">
+                                        <a href="./farm/detail/13">
+                                            <div class="pasture_background" style="background: url({% static 'img/farm/와우목장/9.jpg' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                        </a>
+                                    </div>
+                                    <div class="swiper-slide pasture_slide">
+                                        <a href="./farm/detail/14">
+                                            <div class="pasture_background" style="background: url({% static 'img/farm/요라파목장/1.jpg' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                        </a>
+                                    </div>
+                                    <div class="swiper-slide pasture_slide">
+                                        <a href="./farm/detail/15">
+                                            <div class="pasture_background" style="background: url({% static 'img/farm/은아목장/1.jpg' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                        </a>
+                                    </div>
+                                    <div class="swiper-slide pasture_slide">
+                                        <a href="./farm/detail/16">
+                                            <div class="pasture_background" style="background: url({% static 'img/farm/지헌목장/6.png' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                        </a>
+                                    </div>
+                                    <div class="swiper-slide pasture_slide">
+                                        <a href="./farm/detail/17">
+                                            <div class="pasture_background" style="background: url({% static 'img/farm/진주목장/2.jpg' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                        </a>
+                                    </div>
+                                    <div class="swiper-slide pasture_slide">
+                                        <a href="./farm/detail/18">
+                                            <div class="pasture_background" style="background: url({% static 'img/farm/청계목장/3.png' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                        </a>
+                                    </div>
+                                    <div class="swiper-slide pasture_slide">
+                                        <a href="./farm/detail/19">
+                                            <div class="pasture_background" style="background: url({% static 'img/farm/청원목장/2.png' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                        </a>
+                                    </div>
+                                    <div class="swiper-slide pasture_slide">
+                                        <a href="./farm/detail/20">
+                                            <div class="pasture_background" style="background: url({% static 'img/farm/태신목장/5.png' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                        </a>
+                                    </div>
+                                    <div class="swiper-slide pasture_slide">
+                                        <a href="./farm/detail/21">
+                                            <div class="pasture_background" style="background: url({% static 'img/farm/파도목장/5.jpg' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                        </a>
+                                    </div>
+                                    <div class="swiper-slide pasture_slide">
+                                        <a href="./farm/detail/22">
+                                            <div class="pasture_background" style="background: url({% static 'img/farm/하늘목장/2.png' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                        </a>
+                                    </div>
+                                    <div class="swiper-slide pasture_slide">
+                                        <a href="./farm/detail/23">
+                                            <div class="pasture_background" style="background: url({% static 'img/farm/해뜰목장/4.jpg' %}); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <div class="swiper-button-next pasture_button_next"></div>
+                                <div class="swiper-button-prev pasture_button_prev"></div>
+                                <div class="swiper-pagination pasture_pagination"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        {% include 'footer.html' %}
+    </div>
+</body>
+</html>

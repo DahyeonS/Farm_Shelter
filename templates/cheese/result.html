@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>결과</title>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script>
+        const data = '{{data}}'.replace(/&#x27;/g, "\"");
+        const cheese_data = JSON.parse(data)
+        const cheeseKey = Object.keys(cheese_data)
+        const cheeseValue = Object.values(cheese_data)
+    </script>
+</head>
+<body>
+    {% load static %}
+    {% include 'loading.html' %}
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/user/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cheese/result.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cheese/cheese_note.css' %}">
+    <link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css" rel="stylesheet">
+    <script src="{% static 'js/common.js' %}"></script>
+    <script src="{% static 'js/cheese/result.js' %}"></script>
+
+    <div class="wrap">
+        <header class="login_header">
+            <div class="logo">
+                <a href="{% url 'index' %}">
+                    <img src="{% static 'img/common/logo_photo.png' %}" alt="logo.png">
+                </a>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="main_container">
+                <div class="cheese_result_box">
+                    <div class="cheese_correct_box">
+                        <div class="cc_title_box">
+                            <img src="{% static 'img/cheese/result/quote.png' %}" alt="quote" class="quote left_quote">
+                            <div class="cc_title">
+                                <div style="gap: 10px;"> 이 치즈는 <div><span class="onePersent"></span></div> 확률로</div>
+                                <div>
+                                    <span class="oneTextBox">
+                                        <img src="{% static 'img/common/test_line.png' %}" alt="형광펜">
+                                        <div class="oneText"></div>
+                                    </span>
+                                    입니다
+                                </div>
+                            </div>
+                            <img src="{% static 'img/cheese/result/quote.png' %}" alt="quote" class="quote right_quote">
+                        </div>
+                        <div class="cc_explanation_box">
+                            <div class="cc_e_pic_box">
+                                <div class="pic_box pic1"></div>
+                                <div class="pic_box pic2"></div>
+                            </div>
+                            <div class="cc_e_text_box">
+                                <div class="cc_e_context_box"></div>
+                                <div class="cc_e_other_cheese_box"></div>
+                                <div class="source_box">
+                                    <a href="https://post.naver.com/viewer/postView.nhn?volumeNo=6570103&memberNo=2430564" target="_blank" rel="noopener noreferrer">출처: 치즈종류 #2. 제조 방법에 따른 분류 (네이버 포스트)</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cheese_others_box">
+                        <div class="cheese_two_box">
+                            <div class="co_text_box">
+                                <div class="co_num_box_2"></div>
+                                <div class="co_text_box_2"></div>
+                            </div>
+                            <div class="co_img_box co_1"></div>
+                        </div>
+                        <div class="cheese_result_line" id="result_line_1"></div>
+                        <div class="cheese_three_box">
+                            <div class="co_text_box">
+                                <div class="co_num_box_3"></div>
+                                <div class="co_text_box_3"></div>
+                            </div>
+                            <div class="co_img_box co_2"></div>
+                        </div>
+                        <div class="cheese_result_line" id="result_line_2"></div>
+                        <div class="cheese_four_box">
+                            <div class="co_text_box">
+                                <div class="co_num_box_4"></div>
+                                <div class="co_text_box_4"></div>
+                            </div>
+                            <div class="co_img_box co_3"></div>
+                        </div>
+                    </div>
+                    <div class="cheese_detail_btn">
+                        <a href="{% url 'cheese' %}" target="_blank" rel="noopener noreferrer">CHEESE MORE</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
