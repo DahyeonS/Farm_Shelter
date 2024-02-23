@@ -13,3 +13,4 @@ media/
 secrets.json
 *.code-workspace
 ml/
+logs
