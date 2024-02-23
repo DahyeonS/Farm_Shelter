@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from urllib.parse import quote, unquote
 
 from func.cheese import *
@@ -28,8 +29,9 @@ def result(request) :
 
             url = 'proceed?value=' + data
             return render(request, 'cheese/proceed.html', {'url': url})
-    else :
-        return redirect('index')
+        else :
+            messages.error(request, '이미지 파일을 넣어주세요.')
+            return redirect('index')
     
 def proceed(request) :
     value = request.GET.get('value')
