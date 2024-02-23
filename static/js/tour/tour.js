@@ -191,7 +191,7 @@ function showQReply(id) {
     if (loginCheck()) {
         $('#qReply' + id).show();
         $('#qrwrite' + id).hide();
-    } alert('로그인이 필요합니다.');
+    } else alert('로그인이 필요합니다.');
 }
 
 function showReviewUpdate(id, rate) {
@@ -200,7 +200,7 @@ function showReviewUpdate(id, rate) {
         $('#review' + id).hide();
         $('#rupdate' + id).hide();
         $(`#review_update${id} .rate input[value="${parseFloat(rate)}"]`).attr('checked', true);
-    } alert('로그인이 필요합니다.');
+    } else alert('로그인이 필요합니다.');
 }
 
 function showQuestionUpdate(id) {
@@ -209,7 +209,7 @@ function showQuestionUpdate(id) {
         $('#question' + id).hide();
         $('#qupdate' + id).hide();
         $(`#question_update${id} .rate input[value="${parseFloat(rate)}"]`).attr('checked', true);
-    } alert('로그인이 필요합니다.');
+    } else alert('로그인이 필요합니다.');
 }
 
 function showRReplyUpdate(id) {
@@ -217,7 +217,7 @@ function showRReplyUpdate(id) {
         $('#rReplyUpdate' + id).show();
         $('#review_reply' + id).hide();
         $('#rrupdate' + id).hide();
-    } alert('로그인이 필요합니다.');
+    } else alert('로그인이 필요합니다.');
 }
 
 function showQReplyUpdate(id) {
@@ -226,7 +226,7 @@ function showQReplyUpdate(id) {
         $(`#qReply` + id).show();
         $('#question_reply' + id).hide();
         $('#qrupdate' + id).hide();
-    } alert('로그인이 필요합니다.');
+    } else alert('로그인이 필요합니다.');
 }
 
 function writeReview(id) {
