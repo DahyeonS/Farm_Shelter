@@ -108,7 +108,7 @@
                         <form action="cheese/result" method="post" enctype="multipart/form-data" id="cheese">
                             {% csrf_token %}
                             <input type="file" name="saveFile" id="upload" style="display: none;">
-                            <div class="cm_download_box"><img src="{% static 'img/common/download.png' %}" alt=""></div>
+                            <div class="cm_download_box"><img src="{% static 'img/common/download.png' %}"></div>
                         </form>
                         <div class="cm_text_box">
                             <span>사진으로 AI가 알려주는 치즈</span>
