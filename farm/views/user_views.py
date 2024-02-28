@@ -80,6 +80,8 @@ def modify_reservation(request, id) :
         form = ReservateForm(request.POST, instance=reservate)
         if form.is_valid() :
             new_reservate = form.save(commit=False)
+            new_reservate.email = None
+            new_reservate.password = None
             new_reservate.modified_date = timezone.now()
             new_reservate.save()
 

@@ -48,8 +48,8 @@
                                     </div>
                                 {% endfor %}
                             {% endif %}
-                            <input placeholder="First name" type="text" name="last_name" value="{{ user.last_name|default_if_none:'' }}">
-                            <input placeholder="Last name" type="text" name="first_name" value="{{ user.first_name|default_if_none:'' }}">
+                            <input placeholder="성" type="text" name="last_name" value="{{ user.last_name|default_if_none:'' }}">
+                            <input placeholder="이름" type="text" name="first_name" value="{{ user.first_name|default_if_none:'' }}">
                             <input type="submit" value="수정하기" class="submit">
                         </form>
                         <div class="ext_login modify_ext">

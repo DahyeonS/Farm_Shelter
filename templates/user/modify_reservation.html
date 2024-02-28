@@ -45,6 +45,7 @@
                                 {% csrf_token %}
                                 <input type="hidden" name="username" value="{{form.username.value}}">
                                 <input type="hidden" name="email" value="{{form.email.value}}">
+                                <input type="hidden" name="password" value="{{form.password.value}}">
                                 <label for="last_name">성</label>
                                 <input placeholder="Last Name" type="text" name="last_name" id="last_name" value="{{form.last_name.value|default_if_none:''}}">
                                 <label for="first_name">이름</label>

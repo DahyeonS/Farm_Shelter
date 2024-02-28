@@ -45,4 +45,4 @@ def cancel_confirm(reservate):
     payment = Payment.objects.filter(reservation=reservate).all()
     if payment :
         subject = '[목장쉼터] 결제가 취소되었습니다.'
-        payment_mail(subject, payment, timezone.now())
+        payment_mail(subject, payment[0], timezone.now())

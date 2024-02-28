@@ -79,10 +79,10 @@
                                 </div>
                             {% endif %}
                             <div>
-                                <input placeholder="Last name"  type="text" name="last_name" value="{{ form.last_name.value|default_if_none:'' }}">
+                                <input placeholder="성"  type="text" name="last_name" value="{{ form.last_name.value|default_if_none:'' }}">
                             </div>
                             <div>
-                                <input placeholder="First name"  type="text" name="first_name" value="{{ form.first_name.value|default_if_none:'' }}">
+                                <input placeholder="이름"  type="text" name="first_name" value="{{ form.first_name.value|default_if_none:'' }}">
                             </div>
                             <button type="submit">가입하기</button>
                         </form>
