@@ -16,8 +16,11 @@
 ## 프레임워크
 - Django
 
+## OS
+- Windows 10, 11
+- Ubuntu
+
 ## 서버
-- Ubuntu *(Oracle VirtualBox)*
 - Gunicorn
 - Nginx
 
@@ -37,4 +40,5 @@
 - VSCode
 - Spyder
 - Jupyter Notebook
+- Oracle VirtualBox
 - MobaXterm
