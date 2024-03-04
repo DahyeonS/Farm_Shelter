@@ -3,21 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .reservate_box {
+            width: 30%;
+            margin: auto;
+            margin-top: 50px;
+            font-family: 'ScoreDream';
+            gap: 10px;
+        }
+        .reservate_title {
+            width: 100%;
+            font-size: 30px;
+            font-family: 'SCoreDream';
+            font-weight: 700;
+            color: #4c956c;
+            margin-bottom: 30px;
+        }
+        .reservate_box span {
+            padding: 10px 20px;
+            background-color: #4c956c;
+            border-radius: 3px;
+            font-weight: 800;
+            font-size: 16px;
+            color: #fff;
+            font-family: 'ScoreDream';
+
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        .cancel_box {
+            color: red;
+        }
+    </style>
 </head>
 <body>
-    <h3>{{payment.reservation.last_name}}{{payment.reservation.first_name}}님의 결제내역</h3>
-    <h4>주문코드 - {{payment.uid}}</h4>
-    <h4>결제일자 - {{payment.reservation.paid_date|date:'Y년 n월 j일 A g:i'}}</h4>
-    <br>
-    <h4>예약번호 - {{payment.reservation.num}}</h4>
-    <h4>투어명 - {{payment.reservation.tour.name}}</h4>
-    <h4>인원 - {{payment.reservation.people}}인</h4>
-    <h4>예약일자 - {{payment.reservation.reserved_date|date:'Y년 n월 j일 A g:i'}}</h4>
-    {% if payment.reservation.modified_date %}
-    <h4>변경일자 - {{payment.reservation.modified_date|date:'Y년 n월 j일 A g:i'}}</h4>
-    {% endif %}
-    {% if cancel %}
-    <h4>취소일자 - {{cancel|date:'Y년 n월 j일 A g:i'}}</h4>
-    {% endif %}
+    <div class="reservation_box">
+        <div class="reservate_title">{{payment.reservation.last_name}}{{payment.reservation.first_name}}님의 결제내역</div>
+        <span>주문코드 - {{payment.uid}}</span>
+        <span>결제일자 - {{payment.reservation.paid_date|date:'Y년 n월 j일 A g:i'}}</span>
+        <span>예약번호 - {{payment.reservation.num}}</span>
+        <span>투어명 - {{payment.reservation.tour.name}}</span>
+        <span>인원 - {{payment.reservation.people}}인</span>
+        <span>예약일자 - {{payment.reservation.reserved_date|date:'Y년 n월 j일 A g:i'}}</span>
+        {% if payment.reservation.modified_date %}
+        <span>변경일자 - {{payment.reservation.modified_date|date:'Y년 n월 j일 A g:i'}}</span>
+        {% endif %}
+        <div class="cancel_box">
+            {% if cancel %}
+            <span>취소일자 - {{cancel|date:'Y년 n월 j일 A g:i'}}</span>
+            {% endif %}
+        </div>
+    </div>
 </body>
 </html>
