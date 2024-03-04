@@ -19,7 +19,7 @@
 ## Database
 - SQLite3
 
-## 패키지
+## 사용 패키지
 - Tensorflow
 - pandas
 - Folium
