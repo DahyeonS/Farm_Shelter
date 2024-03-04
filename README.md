@@ -16,6 +16,9 @@
 ## 프레임워크
 - Django
 
+## 사용 DB
+- SQLite3
+
 ## 사용 패키지
 - Tensorflow
 - pandas
