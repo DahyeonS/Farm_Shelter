@@ -16,6 +16,10 @@
 ## 프레임워크
 - Django
 
+## 서버
+- Oracle VirtualBox
+- Ubuntu
+
 ## 가상환경
 - miniconda3
 
@@ -27,3 +31,9 @@
 - pandas
 - Folium
 - iamport
+
+## IDE 및 소프트웨어
+- VSCode
+- Spyder
+- Jupyter Notebook
+- MobaXterm
