@@ -16,10 +16,10 @@
 ## 프레임워크
 - Django
 
-## 사용 DB
+## Database
 - SQLite3
 
-## 사용 패키지
+## 패키지
 - Tensorflow
 - pandas
 - Folium
