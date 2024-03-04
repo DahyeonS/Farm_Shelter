@@ -59,12 +59,12 @@
                                             <a href="{% url 'tour_detail' r.tour.id %}" target="_blank">{{r.tour.name}}</a>
                                         </div>
                                         <div class="tour_td tbody_td">{{r.people}}</div>
-                                        <div class="tour_td tbody_td" style="font-size: 13px;">{{r.reserved_date|date:'Y년 n월 j일 A G:i'}}</div>
+                                        <div class="tour_td tbody_td" style="font-size: 13px;">{{r.reserved_date|date:'Y년 n월 j일 A g:i'}}</div>
                                         <div class="tour_td tbody_td" style="font-size: 13px;">
                                             {% if r.paid_date == None %}
                                                 <a href="{% url 'payment' r.id %}">미결제</a>
                                             {% else %}
-                                                {{r.paid_date|date:'Y년 n월 j일 A G:i'}}
+                                                {{r.paid_date|date:'Y년 n월 j일 A g:i'}}
                                             {% endif %}
                                         </div>
                                         <div class="tour_td tbody_td">
@@ -95,7 +95,7 @@
                                             {% if r.paid_date == None %}
                                                 <a href="{% url 'payment' r.id %}">미결제</a>
                                             {% else %}
-                                                변경 날짜 : {{r.paid_date|date:'Y년 n월 j일 A G:i'}}
+                                                변경 날짜 : {{r.paid_date|date:'Y년 n월 j일 A g:i'}}
                                             {% endif %}
                                         </div>
                                         <div class="tm_td">

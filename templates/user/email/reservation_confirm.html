@@ -44,13 +44,13 @@
         <span>인원 - {{reservate.people}}인</span>
         <span>예약번호 - {{reservate.num}}</span>
         <span>투어명 - {{reservate.tour.name}}</span>
-        <span>예약일자 - {{reservate.reserved_date|date:'Y년 n월 j일 A G:i'}}</span>
+        <span>예약일자 - {{reservate.reserved_date|date:'Y년 n월 j일 A g:i'}}</span>
         {% if reservate.modified_date %}
-        <span>변경일자 - {{reservate.modified_date|date:'Y년 n월 j일 A G:i'}}</span>
+        <span>변경일자 - {{reservate.modified_date|date:'Y년 n월 j일 A g:i'}}</span>
         {% endif %}
         <div class="cancel_box">
             {% if cancel %}
-            <span>취소일자 - {{cancel|date:'Y년 n월 j일 A G:i'}}</span>
+            <span>취소일자 - {{cancel|date:'Y년 n월 j일 A g:i'}}</span>
             <br>
             <span>취소된 예약은 되돌릴 수 없습니다.</span>
             {% endif %}

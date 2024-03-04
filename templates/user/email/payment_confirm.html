@@ -7,17 +7,17 @@
 <body>
     <h3>{{payment.reservation.last_name}}{{payment.reservation.first_name}}님의 결제내역</h3>
     <h4>주문코드 - {{payment.uid}}</h4>
-    <h4>결제일자 - {{payment.reservation.paid_date|date:'Y년 n월 j일 A G:i:s'}}</h4>
+    <h4>결제일자 - {{payment.reservation.paid_date|date:'Y년 n월 j일 A g:i'}}</h4>
     <br>
     <h4>예약번호 - {{payment.reservation.num}}</h4>
     <h4>투어명 - {{payment.reservation.tour.name}}</h4>
     <h4>인원 - {{payment.reservation.people}}인</h4>
-    <h4>예약일자 - {{payment.reservation.reserved_date|date:'Y년 n월 j일 A G:i:s'}}</h4>
+    <h4>예약일자 - {{payment.reservation.reserved_date|date:'Y년 n월 j일 A g:i'}}</h4>
     {% if payment.reservation.modified_date %}
-    <h4>변경일자 - {{payment.reservation.modified_date|date:'Y년 n월 j일 A G:i:s'}}</h4>
+    <h4>변경일자 - {{payment.reservation.modified_date|date:'Y년 n월 j일 A g:i'}}</h4>
     {% endif %}
     {% if cancel %}
-    <h4>취소일자 - {{cancel|date:'Y년 n월 j일 A G:i'}}</h4>
+    <h4>취소일자 - {{cancel|date:'Y년 n월 j일 A g:i'}}</h4>
     {% endif %}
 </body>
 </html>
