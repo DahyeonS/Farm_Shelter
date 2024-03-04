@@ -17,8 +17,7 @@
 - Django
 
 ## 서버
-- Oracle VirtualBox
-- Ubuntu
+- Ubuntu (Oracle VirtualBox 이용)
 - Gunicorn
 - Nginx
 
