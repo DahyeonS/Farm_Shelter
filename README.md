@@ -19,6 +19,8 @@
 ## 서버
 - Oracle VirtualBox
 - Ubuntu
+- Gunicorn
+- Nginx
 
 ## 가상환경
 - miniconda3
