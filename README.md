@@ -16,6 +16,9 @@
 ## 프레임워크
 - Django
 
+## 가상환경
+- miniconda3
+
 ## Database
 - SQLite3
 
