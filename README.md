@@ -5,4 +5,8 @@
 
 *[수강 노트 링크](https://github.com/DahyeonS/Java_Python_Lecture)*
 
+사용 언어 - Python, HTML, JavaScript, CSS
+
+프레임워크 - Django
+
 제작: [서다현](https://github.com/DahyeonS), [최연준](https://github.com/bluyeon1), [황영선](https://github.com/siucrystal)
