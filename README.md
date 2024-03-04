@@ -35,6 +35,8 @@
 - pandas
 - Folium
 - iamport
+- jQuery
+- AJAX
 
 ## IDE 및 소프트웨어
 - VSCode
