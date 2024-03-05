@@ -10,6 +10,10 @@
 - [농림축산식품부 낙농체험 목장 정보](https://www.data.go.kr/data/15005290/fileData.do)
 - [낙농진흥회](https://www.dairy.or.kr/kor/sub02/menu_04_1_1.html)
 
+## 자료 조사 담당
+- 머신 러닝 - [서다현](https://github.com/DahyeonS)
+- 치즈 사전, 낙농체험 목장 - [최연준](https://github.com/bluyeon1), [황영선](https://github.com/siucrystal) 
+
 ## *cheese_classification.py*
 인공신경망을 활용한 치즈 분류 모델링
 - 결과물 - *cheese.h5*
