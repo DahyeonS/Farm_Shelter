@@ -18,26 +18,26 @@
 인공신경망을 활용한 치즈 분류 모델링
 - 결과물 - *cheese.h5*
 
-담당자: [서다현](https://github.com/DahyeonS)
+담당자 -  [서다현](https://github.com/DahyeonS)
 
 ## *cheese_db.py*
 치즈 데이터 DB 입력
 
-담당자: [서다현](https://github.com/DahyeonS)
+담당자 -  [서다현](https://github.com/DahyeonS)
 
 ## *Farm Mapping.ipynb*
 낙농체험 목장 지도 시각화 및 데이터 정제
 - 결과물 - *new_farm.p*
 
-담당자: [서다현](https://github.com/DahyeonS), [최연준](https://github.com/bluyeon1)
+담당자 - [서다현](https://github.com/DahyeonS), [최연준](https://github.com/bluyeon1)
 
 ## *farm_db.py*
 낙농체험 목장 데이터 DB 입력
 
-담당자: [서다현](https://github.com/DahyeonS)
+담당자 - [서다현](https://github.com/DahyeonS)
 
 ## *farm.py*
 CSV에서 불러온 낙농체험 목장 데이터를 저장
 - 결과물 - *farm.p*
 
-담당자: [서다현](https://github.com/DahyeonS), [최연준](https://github.com/bluyeon1)
+담당자 - [서다현](https://github.com/DahyeonS), [최연준](https://github.com/bluyeon1)
