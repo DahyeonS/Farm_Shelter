@@ -62,12 +62,10 @@
                                 <input placeholder="Password Check"  type="password" name="password2" value="{{ form.password2.value|default_if_none:'' }}">
                             </div>
                             {% if form.password2.errors %}
-                                {% for field in form %}
-                                    {% if field.errors %}
-                                        <div>
-                                            <strong class="login_error">{{field.errors}}</strong>
-                                        </div>
-                                    {% endif %}
+                                {% for error in form.password2.errors %}
+                                    <div>
+                                        <strong class="login_error">{{error}}</strong>
+                                    </div>
                                 {% endfor %}
                             {% endif %}
                             <div>
