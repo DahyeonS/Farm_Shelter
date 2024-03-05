@@ -3,7 +3,7 @@
 
 담당자: [서다현](https://github.com/DahyeonS)
 
-## <i>__init__.py</i>
+## <i>\_\_init\_\_.py</i>
 패키지를 초기화하는 파일입니다.
 
 ## settings
