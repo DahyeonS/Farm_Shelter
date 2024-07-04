@@ -2,7 +2,7 @@ from django.core.files.storage import FileSystemStorage
 import pathlib, json, os
 from tensorflow import keras
 
-UPLOAD_FOLDER = os.getcwd() + '/media/ml'
+UPLOAD_FOLDER = os.getcwd() + '/media/ml/classification'
 
 def cheese_test(new_name) :
     model = keras.models.load_model('cheese.h5')
@@ -12,12 +12,12 @@ def cheese_test(new_name) :
     class_names = ['bloomy', 'blue', 'fresh', 'hard', 'semi-soft', 'washed-rind']
 
     test_img = keras.utils.image_dataset_from_directory(
-        pathlib.Path("media"),
+        pathlib.Path("media/ml"),
         image_size=(img_height, img_width),
         batch_size=batch_size
     )
 
-    result = model.predict(test_img)
+    result = model.predict(test_img) # 2차원 배열의 정수 6개 예시 - [[-5.5395255 -2.0526016 -2.0175126  5.378921   5.791862   3.880874 ]]
 
     new_result = []
     size = result.max() - result.min()
