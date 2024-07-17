@@ -30,7 +30,7 @@
 ## Database
 - SQLite3
 
-## 사용 패키지
+## 사용 라이브러리
 - Tensorflow
 - pandas
 - Folium
