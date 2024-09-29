@@ -27,7 +27,7 @@
         <main class="main">
             <div class="main_container">
                 <div class="tour_total_box">
-                    <div class="tour_title">목장 비회원 예약내역</div>
+                    <div class="tour_title">투어 비회원 예약내역</div>
 
                     <div class="tour_box">
                         <div class="tour_table">
@@ -52,7 +52,7 @@
                                     </div>
                                     {% if r.paid_date %}
                                     <div class="non_item_box item_three three_size">
-                                        <div><span>결제일자</span> {{r.paid_date|date:'Y년 n월 j일 A G:i:s'}}</div>
+                                        <div class="paid"><span>결제일자</span> {{r.paid_date|date:'Y년 n월 j일 A G:i:s'}}</div>
                                     </div>
                                     {% else %}
                                     <div class="non_item_box item_three">
